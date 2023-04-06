@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date.datetime: MyString
+  duration.integer: MyString
+  departure_airport_id.integer: MyString
+  arrival_airport_id.integer: MyString
+
+two:
+  date.datetime: MyString
+  duration.integer: MyString
+  departure_airport_id.integer: MyString
+  arrival_airport_id.integer: MyString
