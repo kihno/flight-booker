@@ -14,6 +14,7 @@
   <%= select_tag("passengers", options_for_select([1,2,3,4])) %>
 
   <%= label_tag "Date" %>
-  <%= date_select("flight", "date") %>
+  <%= select_tag "flight_date", options_for_select(Flight.get_flight_dates) %>
+  <%# <%= date_select("flight", "date") %>
 
 <% end %>

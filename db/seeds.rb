@@ -34,31 +34,53 @@ Airport.create([
 
 p "Created #{Airport.count} Airports"
 
-Flight.create([
-  {
-    departure_airport: Airport.all[0],
-    arrival_airport: Airport.all[1],
-    date: DateTime.new(2023, 7, 8, 8, 5),
-    duration: 19800,
-  },
-  {
-    departure_airport: Airport.all[1],
-    arrival_airport: Airport.all[2],
-    date: DateTime.new(2023, 7, 8, 18, 5),
-    duration: 25920,
-  },
-  {
-    departure_airport: Airport.all[2],
-    arrival_airport: Airport.all[3],
-    date: DateTime.new(2023, 7, 8, 21, 5),
-    duration: 9360,
-  },
-  {
-    departure_airport: Airport.all[0],
-    arrival_airport: Airport.all[4],
-    date: DateTime.new(2023, 7, 8, 9, 5),
-    duration: 42300,
-  }
-])
+flights = {
+  LAX: { JFK: 19800, LHR: 37440, FCO: 42840, HND: 42300 },
+  JFK: { LAX: 19800, LHR: 25920, FCO: 32040, HND: 51120 },
+  LHR: { JFK: 25920, LAX: 37440, FCO: 9360, HND: 50400 },
+  FCO: { JFK: 32040, LHR: 9360, LAX: 42840, HND:  45000},
+  HND: { JFK: 51120, LHR: 50400, FCO: 45000, LAX: 42300 }
+}
+
+flights.each do |origin, destinations|
+  destinations.each do |destination, duration|
+    date = DateTime.now
+    for i in 0..7
+      Flight.create(
+        :departure_airport => Airport.find_by(code: origin),
+        :arrival_airport => Airport.find_by(code: destination),
+        :date => date + i,
+        :duration => duration
+      )
+    end
+  end
+end
+
+# Flight.create([
+#   {
+#     departure_airport: Airport.all[0],
+#     arrival_airport: Airport.all[1],
+#     date: DateTime.new(2023, 7, 8, 8, 5),
+#     duration: 19800,
+#   },
+#   {
+#     departure_airport: Airport.all[1],
+#     arrival_airport: Airport.all[2],
+#     date: DateTime.new(2023, 7, 8, 18, 5),
+#     duration: 25920,
+#   },
+#   {
+#     departure_airport: Airport.all[2],
+#     arrival_airport: Airport.all[3],
+#     date: DateTime.new(2023, 7, 8, 21, 5),
+#     duration: 9360,
+#   },
+#   {
+#     departure_airport: Airport.all[0],
+#     arrival_airport: Airport.all[4],
+#     date: DateTime.new(2023, 7, 8, 9, 5),
+#     duration: 42300,
+#   }
+# ])
 
 p "Created #{Flight.count} Flights"
