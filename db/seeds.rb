@@ -49,7 +49,21 @@ flights.each do |origin, destinations|
       Flight.create(
         :departure_airport => Airport.find_by(code: origin),
         :arrival_airport => Airport.find_by(code: destination),
-        :date => date + i,
+        :date => date.at_beginning_of_day + i,
+        :duration => duration
+      )
+
+      Flight.create(
+        :departure_airport => Airport.find_by(code: origin),
+        :arrival_airport => Airport.find_by(code: destination),
+        :date => date.at_midday + i,
+        :duration => duration
+      )
+
+      Flight.create(
+        :departure_airport => Airport.find_by(code: origin),
+        :arrival_airport => Airport.find_by(code: destination),
+        :date => date.at_end_of_day + i,
         :duration => duration
       )
     end
