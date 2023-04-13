@@ -2,8 +2,10 @@
 
 <h3>Search for Flights:</h3>
 
-<%= render "form", flight: Flight.new %>
+<section>
+  <%= render "form", flight: Flight.new %>
+</section>
 
-<%= turbo_frame_tag "flight_results" do %>
-
-<% end %>
+<section>
+  <%= render "results" unless @available_flights.nil? %>
+</section>

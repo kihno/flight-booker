@@ -1,0 +1,7 @@
+<h3>Search Results:</h3>
+
+<% if @available_flights.empty? %>
+  <p>Sorry, no flights match your search.</p>
+<% else %>
+  <%= render "flight", flights: @available_flights %>
+<% end %>
